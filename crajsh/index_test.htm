@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Crajsh</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!--<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>-->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <style type="text/css">
+        
+        body 
+        {
+            background-color: #e8f3fe; //#eaf5ff;
+            overflow: hidden;
+            font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 1.1em;			
+        }
+        
+        body, a, p, table, tr, td {
+            margin: 0px;
+            padding: 0px;            
+        }
+        
+        a
+        {
+	        text-decoration: none;
+	        color: #2e6e9e;
+        }
+        
+        a:hover
+        {
+	        color: #e17009;
+        }
+        
+        .round 
+        {
+            background-color: #eaf5ff;
+            margin: 5px;
+            padding: 0px;
+            border: 1px solid #a6c9e2;
+            -moz-border-radius: 5px; 
+            -webkit-border-radius: 5px; 
+            border-radius: 5px;	
+        }
+        
+        .rc 
+        {
+            background-color: #eaf5ff;
+            margin: 3px;
+            padding: 0px;
+            border: 1px solid #a6c9e2;
+            -moz-border-radius: 5px; 
+            -webkit-border-radius: 5px; 
+            border-radius: 5px;	     
+        }
+        
+        #sizeofmap
+        {
+			font-size: 0.6em;
+        }
+        
+        .menutitle
+        {
+	        text-align: center;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin: 3px 0px 0px 0px;
+        }
+        
+        button, input, .radiogroup
+        {
+            padding: 0px;
+            margin: 5px;
+            text-align: center;	
+        }
+        
+        #newgame 
+        {            
+	        font-size: 1.0em;	
+        }
+        
+        #maintable
+        {
+	        margin: auto;
+	        text-align: center;
+	        vertical-align: middle;
+	        padding: 0px;
+	        margin: 0px;
+        }	        
+        
+        .radiogroup
+        {
+            font-size: smaller;
+        }
+        
+        .centered
+        {
+			text-align: center;
+			vertical-align: center;
+		}
+		
+		.credits
+		{
+			font-size: 0.8em;
+            padding: 10px;
+            margin: 10px;            
+            text-align: left;
+		}
+		
+		.credits table
+		{
+			margin-left: 20px;
+			margin-right: 20px;			
+		}	
+        
+        image
+        {		
+        	msInterpolationMode: nearest-neighbor;
+            image-rendering: optimizeSpeed;            
+        }
+	    		
+    </style>
+    
+    <link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.8.5.custom.css" />
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.5.custom.min.js"></script>
+    
+</head>
+<body>
+	<script type="text/javascript">	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-20604673-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();	
+	</script>
+    
+    <div id="maintable">
+    <table>
+        <tr>	
+        	 <td id="column0">
+                <!-- 3 canvas  --> 
+                <table>
+                    <tr id="c2">
+                    <td><div class="rc"><canvas id="canvas2" width="80" height="80"></canvas></div></td>
+                    </tr>
+                    <tr id="c4">
+                    <td><div class="rc"><canvas id="canvas4" width="80" height="80"></canvas></div></td>
+                    </tr>
+                    <tr id="c6">
+                    <td><div class="rc"><canvas id="canvas6" width="80" height="80"></canvas></div></td>
+                    </tr>							
+                </table>                
+            </td>	
+            <td id="column1">
+                <!-- 4 canvas --> 
+                <table>
+                    <tr id="c1">
+                    <td><div class="rc"><canvas id="canvas1" width="80" height="80"></canvas></div></td>
+                    </tr>
+                    <tr id="c3">
+                    <td><div class="rc"><canvas id="canvas3" width="80" height="80"></canvas></div></td>
+                    </tr>
+                    <tr id="c5">
+                    <td><div class="rc"><canvas id="canvas5" width="80" height="80"></canvas></div></td>
+                    </tr>
+                    <tr id="c7">
+                    <td><div class="rc"><canvas id="canvas7" width="80" height="80"></canvas></div></td>
+                    </tr>							
+                </table>
+                
+            </td>	
+            <td id="column2">
+            	<div id="c0" class="rc">                        
+                <canvas id="canvas0" width="608" height="608"></canvas>
+                </div>
+			
+                <table id="2p" style="display: none">
+                	<tr>
+                		<td id="c8"><div class="rc"><canvas id="canvas8" width="304" height="608"></canvas></div></td>
+                		<td id="c9"><div class="rc"><canvas id="canvas9" width="304" height="608"></canvas></div></td>	                            	
+                    </tr>
+				</table>
+				
+				<table id="3p" style="display: none">
+                	<tr>
+                		<td id="c14"><div class="rc"><canvas id="canvas14" width="304" height="304"></canvas></div></td>
+                		<td id="c15"><div class="rc"><canvas id="canvas15" width="304" height="304"></canvas></div></td>                            	
+                    </tr>                    
+                    <tr>
+                    	<td id="c16" colSpan="2"><div class="rc"><canvas id="canvas16" width="608" height="304"></canvas></div></td>                            	
+                    </tr>
+				</table>
+				
+				<table id="4p" style="display: none">
+                	<tr>
+                		<td id="c10"><div class="rc"><canvas id="canvas10" width="304" height="304"></canvas></div></td>
+                		<td id="c11"><div class="rc"><canvas id="canvas11" width="304" height="304"></canvas></div></td>                            	
+                    </tr>                    
+                    <tr>
+                    	<td id="c12"><div class="rc"><canvas id="canvas12" width="304" height="304"></canvas></div></td>
+                		<td id="c13"><div class="rc"><canvas id="canvas13" width="304" height="304"></canvas></div></td>                            	
+                    </tr>
+				</table>
+            </td>
+            <td id="column3">
+                <div class="centered"> <img src="img/logo.png" width="205" height="94"/></div>
+                
+                <div class="round credits">
+                
+                	<div>A tribute to <a href="http://www.youtube.com/watch?v=R0whHiwr4os">Crash</a>.</div> 
+                    
+                	<table>                	
+                	<tr><td><b>code:</b></td><td><a href="http://twitter.com/p0unce">ponce</a> </td></tr>                    
+                    <tr><td><b>logo:</b></td><td><a href="http://graindolium.paradisia.net">Graindolium</a></td></tr>
+                    <tr><td><b>music:</b></td><td><span id="kaneelarea"><a href="http://www.mynameiskaneel.com">kaneel</a>                      
+                    </span><img class="ui-button" id="muteButton" src="img/sound_icon.png" width="16" height="12"></td></tr>
+                    </table> 
+                    
+                    <div style="text-align: right">                    
+                    <a href="http://www.crajsh.com/about.htm">More</a>
+                    </div>
+                    
+                    
+                </div>
+                                    
+                <div class="round">
+                
+                	<div class="round">
+                    <div class="menutitle">Players</div>							
+                    <div id="numhumans" class="radiogroup">
+                    <table><tr>	                        	
+                    <td>    <input type="radio" id="m12" name="radio" checked="checked"  /><label for="m12">I</label>    </td>
+                    <td>    <input type="radio" id="m22" name="radio" /><label for="m22">II</label>                      </td>
+                    <td>    <input type="radio" id="m32" name="radio" /><label for="m32">III</label>                     </td>
+                    <td>    <input type="radio" id="m42" name="radio" /><label for="m42">IV</label>                      </td>
+                    </tr></table>
+                    </div>
+                    </div>	
+                
+                    <div class="round">
+                    <div class="menutitle">Map</div>							
+                    <div id="sizeofmap" class="radiogroup">
+                    <table><tr>
+                    <td><input type="radio" id="m1" name="radio2" /><label for="m1"><img src="img/small.png" width="20" height="20"></label>                     </td>
+                    <td><input type="radio" id="m2" name="radio2" checked="checked" /><label for="m2"><img src="img/medium.png" width="20" height="20"></label>                    </td>
+                    <td><input type="radio" id="m3" name="radio2" /><label for="m3"><img src="img/large.png" width="20" height="20"></label>   </td>
+                    <td><input type="radio" id="m4" name="radio2" /><label for="m4"><img src="img/huge.png" width="20" height="20"></label>                      </td>
+                    </tr></table>
+         
+                    </div>
+                    </div>						
+                    
+                    <div class="radiogroup">
+                    <button id="newgame">New game</button>
+                    <button id="helpbutton">?</button>                    
+                    </div>                    
+                </div>
+            </td>
+            </tr>	
+    </table>
+    </div>
+    
+    <script type="text/javascript" src="js/crajsh.js"></script> 
+    <script type="text/javascript" src="js/gfm.js"></script> 
+    <script type="text/javascript" src="js/renderer.js"></script> 
+    <script type="text/javascript" src="js/texture.js"></script> 
+    <script type="text/javascript" src="js/texturemanager.js"></script> 
+    <script type="text/javascript" src="js/viewport.js"></script> 
+    <script type="text/javascript" src="js/world.js"></script> 
+    <script type="text/javascript" src="js/bullet.js"></script> 
+    <script type="text/javascript" src="js/bulletpool.js"></script> 
+    <script type="text/javascript" src="js/player.js"></script> 
+    <script type="text/javascript" src="js/camera.js"></script> 
+    <script type="text/javascript" src="js/game.js"></script> 
+    <script type="text/javascript" src="js/pattern.js"></script> 
+    <script type="text/javascript" src="js/patternmanager.js"></script> 
+    <script type="text/javascript" src="js/main.js"></script> 
+    <script type="text/javascript" src="js/sound.js"></script> 
+    <script type="text/javascript" src="js/sample.js"></script> 
+    <script type="text/javascript" src="js/audiomanager.js"></script> 
+    <script type="text/javascript" src="js/letters.js"></script> 
+    
+    <script type="text/javascript">
+        
+        var tron = tron || {};
+       /* if (typeof(G_vmlCanvasManager) !== 'undefined')
+        {
+        	tron.IE8compat = G_vmlCanvasManager;
+    	}
+    	else
+    	{
+	    	tron.IE8compat = false;
+    	}*/
+        
+        $("#newgame").button().click(function(){
+            tron.newGame();			
+        });
+        
+        $("#helpbutton").button().click(function(){
+            tron.help();
+        });
+        
+        $("#m1").button().click(function(){
+            tron.sizeofmap = /* tron.GAME_SMALL */ 6;
+        });
+        $("#m2").button().click(function(){
+            tron.sizeofmap = /* tron.GAME_MEDIUM */ 7;	
+        });
+        $("#m3").button().click(function(){
+            tron.sizeofmap = /* tron.GAME_LARGE */ 8;	
+        });        
+        $("#m4").button().click(function(){
+            tron.sizeofmap = /* tron.GAME_HUGE */ 9;			
+        });	
+        
+        $("#m12").button().click(function(){
+            tron.nHumans = 1;
+        });
+        
+        $("#m22").button().click(function(){
+            tron.nHumans = 2;
+        });
+        
+        $("#m32").button().click(function(){
+            tron.nHumans = 3;
+        });	
+        
+        $("#m42").button().click(function(){
+            tron.nHumans = 4;
+        });	
+        
+        $("#numhumans").buttonset();
+        $("#sizeofmap").buttonset();
+        
+        var windowW = window.innerWidth;
+	    var windowH = window.innerHeight;
+        tron.main = new tron.Main(windowW, windowH);
+        tron.sizeofmap = 7;
+        tron.nHumans = 1;
+        tron.t = 0;
+        tron.smoothMode = false;
+        tron.mute = false;
+        
+        $("#muteButton").click(function()
+        {
+            tron.mute = !tron.mute;
+            if (tron.mute)
+            {
+	            document.getElementById("muteButton").src = 'img/sound_mute.png';
+                tron.main.disableMusic();
+            }
+            else
+            {
+                document.getElementById("muteButton").src = 'img/sound_icon.png';
+                tron.main.enableMusic();
+            }
+        });
+        
+        tron.loop = function()
+        {           
+	        var dt = tron.smoothMode ? 0.029 : 0.050;//0.058; 
+            tron.main.loop(tron.t, dt);
+            tron.t += dt;
+        };
+        
+        tron.newGame = function()		
+        {
+            tron.main.newGame(tron.sizeofmap, tron.nHumans);
+        };
+        
+        tron.help = function()		
+        {
+        	tron.main.goToHelp();
+        };
+        
+        tron.keyHandler = function(e)		
+        {
+	        e.stopPropagation();
+            tron.main.keydown(e);            
+        };  
+    	
+    	tron.resize = function()
+        {
+	        var w = window.innerWidth;
+	        var h = window.innerHeight;
+	        //var w = $("#maintable").innerWidth();
+	        //var h = $("#maintable").innerHeight();
+	        tron.main.resize(w, h);
+        };
+            
+        // install keyboard handler
+        if (document.addEventListener) 
+        {
+            document.addEventListener ('keydown', tron.keyHandler, false);             
+        } 
+        else if (document.attachEvent) 
+        {
+            document.attachEvent('onkeydown', tron.keyHandler);            
+        } 
+        else 
+        {
+            keydown.onkeydown = tron.keyHandler;            
+        }
+        
+        window.onresize = function(event) {
+	        tron.resize();
+		};
+        
+        tron.timer = setInterval(tron.loop, tron.smoothMode ? 29 : 50 /*58*/);        
+    </script>
+    <noscript>
+    Enable Javascript to play this game.
+    </noscript>
+    
+</body>
+</html>
